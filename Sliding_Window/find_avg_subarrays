@@ -1,0 +1,29 @@
+//создать алгоритм, вычисляющий скользящее среднее числового ряда.
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+vector<double> windowSlideAvg(const int* a, int n, int k)
+{
+    int sum = 0;
+    for (int i = 0; i < k; ++i)
+    {
+        sum += a[i];
+    }
+    vector<double> result;
+    result.push_back(sum / k);
+    for (int i = k; i <  n; ++i)
+    {
+        sum = sum - a[i - k] +a[i];
+        result.push_back(sum / k);
+    }
+    return result;
+}
+int main()
+{
+    int n = 30;
+    int* a = new int[n]; 
+    vector<double> result = windowSlideAvg(a, n, 6);
+    return 0;
+}
